@@ -21,7 +21,7 @@ SFS_SHELL	= bin/sfssh
 
 SFS_TEST_SRCS   = $(wildcard tests/*.c)
 SFS_TEST_OBJS   = $(SFS_TEST_SRCS:.c=.o)
-SFS_UNIT_TESTS	= $(patsubst tests/%,bin/%,$(patsubst %.c,%,$(wildcard src/tests/unit_*.c)))
+SFS_UNIT_TESTS	= $(patsubst tests/%,bin/%,$(patsubst %.c,%,$(wildcard tests/unit_*.c)))
 
 # Rules
 
@@ -39,7 +39,7 @@ $(SFS_SHELL):	$(SFS_SHL_OBJS) $(SFS_LIBRARY)
 	@echo "Linking   $@"
 	@$(LD) $(LDFLAGS) -o $@ $^ $(LIBS)
 
-bin/unit_%:	src/tests/unit_%.o $(SFS_LIBRARY)
+bin/unit_%:	tests/unit_%.o $(SFS_LIBRARY)
 	@echo "Linking   $@"
 	@$(LD) $(LDFLAGS) -o $@ $^
 
