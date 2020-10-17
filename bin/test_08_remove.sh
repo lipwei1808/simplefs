@@ -72,7 +72,7 @@ EOF
 cp data/image.5 $SCRATCH/image.5
 trap "rm -fr $SCRATCH" INT QUIT TERM EXIT
 
-echo -n "Testing remove in $SCRATCH/image.5 ... "
+echo -n "Testing   remove in $SCRATCH/image.5 ... "
 if diff -u <(test-0-input | ./bin/sfssh $SCRATCH/image.5 5 2> /dev/null) <(test-0-output) > $SCRATCH/test.log; then
     echo "Success"
 else
@@ -165,7 +165,7 @@ EOF
 }
 
 cp data/image.5 $SCRATCH/image.5
-echo -n "Testing remove in $SCRATCH/image.5 ... "
+echo -n "Testing   remove in $SCRATCH/image.5 ... "
 if diff -u <(test-1-input | ./bin/sfssh $SCRATCH/image.5 5 2> /dev/null) <(test-1-output) > $SCRATCH/test.log; then
     echo "Success"
 else
@@ -240,7 +240,7 @@ EOF
 }
 
 cp data/image.20 $SCRATCH/image.20
-echo -n "Testing remove in $SCRATCH/image.20 ... "
+echo -n "Testing   remove in $SCRATCH/image.20 ... "
 if diff -u <(test-2-input | ./bin/sfssh $SCRATCH/image.20 20 2> /dev/null) <(test-2-output) > $SCRATCH/test.log; then
     echo "Success"
 else

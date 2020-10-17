@@ -65,7 +65,7 @@ EOF
 test-stat() {
     BLOCKS=$1
 
-    echo -n "Testing stat on data/image.$BLOCKS ... "
+    echo -n "Testing   stat on data/image.$BLOCKS ... "
     if diff -u <(image-$BLOCKS-input | ./bin/sfssh data/image.$BLOCKS $BLOCKS 2> /dev/null) <(image-$BLOCKS-output) > test.log; then
     	echo "Success"
     else

@@ -65,7 +65,7 @@ test-debug() {
     BLOCKS=$2
     OUTPUT=$3
 
-    echo -n "Testing debug on $DISK ... "
+    echo -n "Testing   debug on $DISK ... "
     if diff -u <(./bin/sfssh $DISK $BLOCKS <<<debug 2> /dev/null) <($OUTPUT) > test.log; then
     	echo "Success"
     else

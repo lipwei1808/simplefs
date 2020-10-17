@@ -52,7 +52,7 @@ test-format() {
     OUTPUT=$3
 
     cp $DISK $DISK.formatted
-    echo -n "Testing format on $DISK.formatted ... "
+    echo -n "Testing   format on $DISK.formatted ... "
     if diff -u <(test-input | ./bin/sfssh $DISK.formatted $BLOCKS 2> /dev/null) <($OUTPUT) > test.log; then
     	echo "Success"
     else

@@ -56,7 +56,7 @@ EOF
 
 EXIT=0
 
-echo -n "Testing cat on data/image.5 ... "
+echo -n "Testing   cat on data/image.5 ... "
 if diff -u <(image-5-input | ./bin/sfssh data/image.5 5 2> /dev/null | sort) <(image-5-output) > test.log; then
     echo "Success"
 else
@@ -511,7 +511,7 @@ disk mounted.
 EOF
 }
 
-echo -n "Testing cat on data/image.20 ... "
+echo -n "Testing   cat on data/image.20 ... "
 if diff -u <(image-20-input | ./bin/sfssh data/image.20 20 2> /dev/null | sort) <(image-20-output) > test.log; then
     echo "Success"
 else

@@ -51,7 +51,7 @@ EOF
 test-mount () {
     TEST=$1
 
-    echo -n "Testing $TEST on data/image.5 ... "
+    echo -n "Testing   $TEST on data/image.5 ... "
     if diff -u <($TEST-input| ./bin/sfssh data/image.5 5 2> /dev/null) <($TEST-output) > test.log; then
     	echo "Success"
     else
@@ -88,7 +88,7 @@ echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x10 0x34 0xf1 0xf0) >  $SCRATCH/imag
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x05 0x00 0x00 0x00) >> $SCRATCH/image.5
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x01 0x00 0x00 0x00) >> $SCRATCH/image.5
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x80 0x00 0x00 0x00) >> $SCRATCH/image.5
-echo -n "Testing bad-mount on $SCRATCH/image.5 ... "
+echo -n "Testing   bad-mount on $SCRATCH/image.5 ... "
 if diff -u <(bad-mount-input| ./bin/sfssh $SCRATCH/image.5 5 2> /dev/null) <(bad-mount-output) > $SCRATCH/test.log; then
     echo "Success"
 else
@@ -101,7 +101,7 @@ echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x10 0x34 0xf1 0xf0) >  $SCRATCH/imag
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x05 0x00 0x00 0x00) >> $SCRATCH/image.5
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x01 0x00 0x00 0x00) >> $SCRATCH/image.5
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x80 0x00 0x00 0x00) >> $SCRATCH/image.5
-echo -n "Testing bad-mount on $SCRATCH/image.5 ... "
+echo -n "Testing   bad-mount on $SCRATCH/image.5 ... "
 if diff -u <(bad-mount-input| ./bin/sfssh $SCRATCH/image.5 5 2> /dev/null) <(bad-mount-output) > $SCRATCH/test.log; then
     echo "Success"
 else
@@ -114,7 +114,7 @@ echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x10 0x34 0xf0 0xf0) >  $SCRATCH/imag
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x00 0x00 0x00 0x00) >> $SCRATCH/image.5
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x01 0x00 0x00 0x00) >> $SCRATCH/image.5
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x80 0x00 0x00 0x00) >> $SCRATCH/image.5
-echo -n "Testing bad-mount on $SCRATCH/image.5 ... "
+echo -n "Testing   bad-mount on $SCRATCH/image.5 ... "
 if diff -u <(bad-mount-input| ./bin/sfssh $SCRATCH/image.5 5 2> /dev/null) <(bad-mount-output) > $SCRATCH/test.log; then
     echo "Success"
 else
@@ -127,7 +127,7 @@ echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x10 0x34 0xf0 0xf0) >  $SCRATCH/imag
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x05 0x00 0x00 0x00) >> $SCRATCH/image.5
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x02 0x00 0x00 0x00) >> $SCRATCH/image.5
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x80 0x00 0x00 0x00) >> $SCRATCH/image.5
-echo -n "Testing bad-mount on $SCRATCH/image.5 ... "
+echo -n "Testing   bad-mount on $SCRATCH/image.5 ... "
 if diff -u <(bad-mount-input| ./bin/sfssh $SCRATCH/image.5 5 2> /dev/null) <(bad-mount-output) > $SCRATCH/test.log; then
     echo "Success"
 else
@@ -140,7 +140,7 @@ echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x10 0x34 0xf0 0xf0) >  $SCRATCH/imag
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x05 0x00 0x00 0x00) >> $SCRATCH/image.5
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x01 0x00 0x00 0x00) >> $SCRATCH/image.5
 echo -n -e $(printf '\\x%x\\x%x\\x%x\\x%x' 0x70 0x00 0x00 0x00) >> $SCRATCH/image.5
-echo -n "Testing bad-mount on $SCRATCH/image.5 ... "
+echo -n "Testing   bad-mount on $SCRATCH/image.5 ... "
 if diff -u <(bad-mount-input| ./bin/sfssh $SCRATCH/image.5 5 2> /dev/null) <(bad-mount-output) > $SCRATCH/test.log; then
     echo "Success"
 else

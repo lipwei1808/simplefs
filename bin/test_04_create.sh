@@ -547,7 +547,7 @@ EXIT=0
 cp data/image.5 data/image.5.create
 trap "rm -f data/image.5.create test.log" INT QUIT TERM EXIT
 
-echo -n "Testing create in data/image.5.create ... "
+echo -n "Testing   create in data/image.5.create ... "
 if diff -u <(test-input | ./bin/sfssh data/image.5.create 5 2> /dev/null) <(test-output) > test.log; then
     echo "Success"
 else
