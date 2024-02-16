@@ -64,6 +64,10 @@ ssize_t fs_stat(FileSystem *fs, size_t inode_number);
 ssize_t fs_read(FileSystem *fs, size_t inode_number, char *data, size_t length, size_t offset);
 ssize_t fs_write(FileSystem *fs, size_t inode_number, char *data, size_t length, size_t offset);
 
+bool fs_load_inode(FileSystem *fs, size_t inode_number, Inode *node);
+bool fs_save_inode(FileSystem *fs, size_t inode_number, Inode *node);
+void fs_initialize_free_block_bitmap(FileSystem *fs);
+
 #endif
 
 /* vim: set expandtab sts=4 sw=4 ts=8 ft=c: */
