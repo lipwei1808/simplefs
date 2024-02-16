@@ -30,7 +30,20 @@ bool    disk_sanity_check(Disk *disk, size_t blocknum, const char *data);
  *              on failure).
  **/
 Disk *	disk_open(const char *path, size_t blocks) {
-    return NULL;
+    Disk* disk = (Disk*)malloc(sizeof(Disk));
+    if (disk == NULL) {
+        return NULL;
+    }
+    int file = open(path, O_RDWR);
+    if (file == -1) {
+        error("%d\n", errno);
+        return NULL;
+    }
+    disk->fd = file;
+    disk->blocks = blocks;
+    disk->reads = 0;
+    disk->writes = 0;
+    return disk;
 }
 
 /**
@@ -45,6 +58,10 @@ Disk *	disk_open(const char *path, size_t blocks) {
  * @param       disk        Pointer to Disk structure.
  */
 void	disk_close(Disk *disk) {
+    assert(disk != NULL);
+    close(disk->fd);
+    info("Closing disk, reads: %zu, writes: %zu\n", disk->reads, disk->writes);
+    free(disk);
 }
 
 /**
@@ -65,7 +82,15 @@ void	disk_close(Disk *disk) {
  *              (BLOCK_SIZE on success, DISK_FAILURE on failure).
  **/
 ssize_t disk_read(Disk *disk, size_t block, char *data) {
-    return DISK_FAILURE;
+    if (!disk_sanity_check(disk, block, data)) {
+        return DISK_FAILURE;
+    }
+    if (lseek(disk->fd, block * BLOCK_SIZE, SEEK_SET) == -1) {
+        error("errno: %d\n", errno);
+        return DISK_FAILURE;
+    }
+
+    return read(disk->fd, data, BLOCK_SIZE);
 }
 
 /**
@@ -86,7 +111,15 @@ ssize_t disk_read(Disk *disk, size_t block, char *data) {
  *              (BLOCK_SIZE on success, DISK_FAILURE on failure).
  **/
 ssize_t disk_write(Disk *disk, size_t block, char *data) {
-    return DISK_FAILURE;
+    if (!disk_sanity_check(disk, block, data)) {
+        return DISK_FAILURE;
+    }
+    if (lseek(disk->fd, block * BLOCK_SIZE, SEEK_SET) == -1) {
+        error("errno: %d\n", errno);
+        return DISK_FAILURE;
+    }
+
+    return write(disk->fd, data, BLOCK_SIZE);
 }
 
 /* Internal Functions */
@@ -108,7 +141,22 @@ ssize_t disk_write(Disk *disk, size_t block, char *data) {
  *              (true for safe, false for unsafe).
  **/
 bool    disk_sanity_check(Disk *disk, size_t block, const char *data) {
-    return false;
+    // invalid disk
+    if (disk == NULL || disk->fd < 0) {
+        return false;
+    }
+
+    // invalid block
+    if (block >= disk->blocks) {
+        return false;
+    }
+
+    // invalid data
+    if (data == NULL) {
+        return false;
+    }
+
+    return true;
 }
 
 /* vim: set expandtab sts=4 sw=4 ts=8 ft=c: */
