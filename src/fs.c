@@ -257,10 +257,9 @@ bool    fs_remove(FileSystem *fs, size_t inode_number) {
 
     in->valid = false;
     in->indirect = 0;
-    fs_save_inode(fs, inode_number, in);
-
+    res = fs_save_inode(fs, inode_number, in);
     free(in);
-    return false;
+    return res;
 }
 
 /**
@@ -271,7 +270,15 @@ bool    fs_remove(FileSystem *fs, size_t inode_number) {
  * @return      Size of specified Inode (-1 if does not exist).
  **/
 ssize_t fs_stat(FileSystem *fs, size_t inode_number) {
-    return -1;
+    Inode* in;
+    bool res = fs_load_inode(fs, inode_number, in);
+    if (!res) {
+        return -1;
+    }
+
+    int res = in->size;
+    free(in);
+    return res;
 }
 
 /**
@@ -292,6 +299,15 @@ ssize_t fs_stat(FileSystem *fs, size_t inode_number) {
  * @return      Number of bytes read (-1 on error).
  **/
 ssize_t fs_read(FileSystem *fs, size_t inode_number, char *data, size_t length, size_t offset) {
+    Inode* in;
+    bool res = fs_load_inode(fs, inode_number, in);
+    if (!res) {
+        return -1;
+    }
+
+    for (int i = 0; i < POINTERS_PER_INODE; i++) {
+        if (i)
+    }
     return -1;
 }
 
